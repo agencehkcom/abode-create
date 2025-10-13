@@ -138,7 +138,7 @@ const Index = () => {
                   </span>
                 </li>
               </ul>
-              <Button asChild size="lg" className="gradient-accent hover:opacity-90 transition-smooth">
+              <Button asChild size="lg" className="gradient-accent hover:opacity-90 transition-smooth text-black font-semibold">
                 <Link to={`/projets/${projects[1].slug}`}>
                   Découvrir le projet
                   <ArrowRight className="ml-2 h-5 w-5" />

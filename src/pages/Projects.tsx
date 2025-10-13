@@ -47,7 +47,7 @@ const Projects = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={
                   selectedCategory === category
-                    ? "gradient-accent"
+                    ? "gradient-accent text-black font-semibold"
                     : "hover:border-secondary hover:text-secondary transition-smooth"
                 }
               >

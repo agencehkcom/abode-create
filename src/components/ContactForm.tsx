@@ -120,7 +120,7 @@ export const ContactForm = () => {
       <Button
         type="submit"
         size="lg"
-        className="w-full gradient-accent hover:opacity-90 transition-smooth"
+        className="w-full gradient-accent hover:opacity-90 transition-smooth text-black font-semibold"
         disabled={isSubmitting}
       >
         {isSubmitting ? (

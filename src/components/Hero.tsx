@@ -13,7 +13,7 @@ export const Hero = () => {
           alt="Architecture moderne"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/40" />
       </div>
 
       {/* Content */}
@@ -34,7 +34,7 @@ export const Hero = () => {
             <Button 
               asChild 
               size="lg" 
-              className="gradient-accent hover:opacity-90 transition-smooth text-lg px-8"
+              className="gradient-accent hover:opacity-90 transition-smooth text-lg px-8 text-black font-semibold"
             >
               <Link to="/contact">
                 Demander une visite conseil

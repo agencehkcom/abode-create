@@ -132,7 +132,7 @@ const ProjectDetail = () => {
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Discutons de votre projet. Nous vous accompagnons de la conception à la réalisation.
               </p>
-              <Button asChild size="lg" className="gradient-accent hover:opacity-90 transition-smooth">
+              <Button asChild size="lg" className="gradient-accent hover:opacity-90 transition-smooth text-black font-semibold">
                 <Link to="/contact">
                   Demander une visite conseil
                 </Link>

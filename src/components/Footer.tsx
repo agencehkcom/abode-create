@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Instagram, Linkedin, Facebook } from "lucide-react";
+import logoWhite from "@/assets/logo-white.webp";
 
 export const Footer = () => {
   return (
@@ -8,7 +9,11 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">Planet Studio</h3>
+            <img 
+              src={logoWhite} 
+              alt="Planet Studio" 
+              className="h-16 w-auto mb-4"
+            />
             <p className="text-primary-foreground/80 mb-4">
               Architecture / Intérieurs / Design global
             </p>

@@ -132,7 +132,7 @@ const Services = () => {
 
                   {/* CTA */}
                   <div className="pt-6 border-t border-border">
-                    <Button asChild size="lg" className="gradient-accent hover:opacity-90 transition-smooth w-full md:w-auto">
+                    <Button asChild size="lg" className="gradient-accent hover:opacity-90 transition-smooth w-full md:w-auto text-black font-semibold">
                       <Link to="/contact">
                         Demander un devis
                         <ArrowRight className="ml-2 h-5 w-5" />
