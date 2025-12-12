@@ -39,7 +39,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
       <p className="text-muted-foreground mb-6 line-clamp-3">
         {service.description}
       </p>
-      <Button asChild variant="outline" className="w-full group-hover:border-secondary group-hover:text-secondary transition-smooth">
+      <Button asChild variant="outline" className="w-full hover:border-secondary hover:text-black transition-smooth">
         <Link to={`/services#${service.slug}`}>
           En savoir plus
         </Link>

@@ -1,22 +1,83 @@
+import { useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
-import { ArrowLeft, MapPin, Maximize, Calendar, Briefcase, Euro } from "lucide-react";
+import { ArrowLeft, MapPin, Maximize, Calendar, Briefcase, Euro, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   if (!project) {
     return <Navigate to="/projets" replace />;
   }
 
+  const openLightbox = (index: number) => setSelectedImage(index);
+  const closeLightbox = () => setSelectedImage(null);
+  const nextImage = () => {
+    if (selectedImage !== null && project.images) {
+      setSelectedImage((selectedImage + 1) % project.images.length);
+    }
+  };
+  const prevImage = () => {
+    if (selectedImage !== null && project.images) {
+      setSelectedImage((selectedImage - 1 + project.images.length) % project.images.length);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {selectedImage !== null && project.images && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+            onClick={closeLightbox}
+          >
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 text-white/70 hover:text-white p-2"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+              className="absolute left-4 text-white/70 hover:text-white p-2"
+            >
+              <ChevronLeft className="h-12 w-12" />
+            </button>
+            <motion.img
+              key={selectedImage}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              src={project.images[selectedImage]}
+              alt={`${project.title} - Image ${selectedImage + 1}`}
+              className="max-h-[90vh] max-w-[90vw] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+              className="absolute right-4 text-white/70 hover:text-white p-2"
+            >
+              <ChevronRight className="h-12 w-12" />
+            </button>
+            <div className="absolute bottom-4 text-white/70 text-sm">
+              {selectedImage + 1} / {project.images.length}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Image */}
       <section className="pt-32 pb-0">
@@ -28,12 +89,20 @@ const ProjectDetail = () => {
             </Link>
           </Button>
           
-          <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-large mb-12 animate-fade-in">
+          <div 
+            className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-large mb-12 animate-fade-in cursor-pointer group"
+            onClick={() => openLightbox(0)}
+          >
             <img
               src={project.coverImage}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+              <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-medium">
+                Voir la galerie
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -122,6 +191,29 @@ const ProjectDetail = () => {
                   {project.resultats}
                 </p>
               </div>
+
+              {/* Image Gallery */}
+              {project.images && project.images.length > 1 && (
+                <div className="animate-fade-in" style={{ animationDelay: "0.6s" }}>
+                  <h2 className="text-3xl font-bold mb-6">Galerie</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {project.images.map((image, index) => (
+                      <div
+                        key={index}
+                        className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group"
+                        onClick={() => openLightbox(index)}
+                      >
+                        <img
+                          src={image}
+                          alt={`${project.title} - Image ${index + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* CTA */}

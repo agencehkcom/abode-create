@@ -20,8 +20,11 @@ export const Header = () => {
 
   const navLinks = [
     { to: "/", label: "Accueil" },
+    { to: "/agence-sud", label: "Agence Sud" },
+    { to: "/agence-ouest", label: "Agence Ouest" },
     { to: "/projets", label: "Projets" },
     { to: "/services", label: "Services" },
+    { to: "/devis-permis", label: "Devis Permis" },
     { to: "/contact", label: "Contact" },
   ];
 

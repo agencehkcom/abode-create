@@ -393,8 +393,16 @@ const PermisConstruire = () => {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-20 bg-secondary relative overflow-hidden">
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: "url('/graphique/fond-courbes.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
