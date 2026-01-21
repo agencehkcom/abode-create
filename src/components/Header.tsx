@@ -41,10 +41,10 @@ export const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <img 
-              src={logoWhite} 
-              alt="Planet Studio" 
-              className="h-12 w-auto transition-smooth group-hover:opacity-80"
+            <img
+              src={logoWhite}
+              alt="Planet Studio"
+              className="h-20 w-auto transition-smooth group-hover:opacity-80"
             />
           </Link>
 

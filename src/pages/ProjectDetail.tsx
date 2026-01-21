@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
-import { ArrowLeft, MapPin, Maximize, Calendar, Briefcase, Euro, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowLeft, MapPin, Maximize, Briefcase, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ProjectDetail = () => {
@@ -124,7 +124,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Meta Info */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <div>
                 <div className="flex items-center gap-2 text-muted-foreground mb-2">
                   <MapPin className="h-4 w-4" />
@@ -141,24 +141,10 @@ const ProjectDetail = () => {
               </div>
               <div>
                 <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                  <Calendar className="h-4 w-4" />
-                  <span className="text-sm font-medium">Année</span>
-                </div>
-                <p className="font-semibold">{project.annee}</p>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 text-muted-foreground mb-2">
                   <Briefcase className="h-4 w-4" />
                   <span className="text-sm font-medium">Mission</span>
                 </div>
                 <p className="font-semibold text-sm">{project.mission}</p>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                  <Euro className="h-4 w-4" />
-                  <span className="text-sm font-medium">Budget</span>
-                </div>
-                <p className="font-semibold text-sm">{project.budget}</p>
               </div>
             </div>
 
@@ -200,7 +186,7 @@ const ProjectDetail = () => {
                     {project.images.map((image, index) => (
                       <div
                         key={index}
-                        className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group"
+                        className="relative aspect-[16/9] rounded-xl overflow-hidden cursor-pointer group"
                         onClick={() => openLightbox(index)}
                       >
                         <img

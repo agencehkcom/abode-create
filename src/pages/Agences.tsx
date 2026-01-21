@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ContactForm } from "@/components/ContactForm";
@@ -23,13 +24,23 @@ import {
   Waves,
   Eye,
 } from "lucide-react";
-import heroImage from "@/assets/hero-architecture.jpg";
 
 const Agences = () => {
   const featuredProjects = projects.slice(0, 4);
 
+  // Diaporama Hero - images des réalisations
+  const heroImages = projects.map(p => p.coverImage);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 6000); // Change toutes les 6 secondes
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   const stats = [
-    { value: "150+", label: "Projets réalisés" },
+    { value: "500+", label: "Projets réalisés" },
     { value: "98%", label: "Clients satisfaits" },
     { value: "8", label: "Experts passionnés" },
     { value: "2", label: "Agences en France" },
@@ -39,14 +50,30 @@ const Agences = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section */}
+      {/* Hero Section avec diaporama Ken Burns */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={heroImage}
-            alt="Architecture moderne"
-            className="w-full h-full object-cover"
-          />
+        <div className="absolute inset-0 z-0 bg-black">
+          {heroImages.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={false}
+              animate={{
+                opacity: index === currentImageIndex ? 1 : 0,
+                scale: index === currentImageIndex ? 1.08 : 1,
+              }}
+              transition={{
+                opacity: { duration: 1.5, ease: "easeInOut" },
+                scale: { duration: 6, ease: "linear" }
+              }}
+              className="absolute inset-0"
+            >
+              <img
+                src={image}
+                alt="Réalisation Planet Studio"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          ))}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/40" />
         </div>
 
@@ -61,10 +88,12 @@ const Agences = () => {
               <Users className="h-4 w-4" />
               <span className="text-sm font-medium">2 agences • 8 experts</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-normal mb-6 leading-tight">
               <span className="text-secondary">/</span>architecture{" "}
-              <span className="text-secondary">/</span>intérieurs{" "}
-              <span className="text-secondary">/</span>design global
+              <span className="text-secondary">/</span>intérieurs
+              <span className="block">
+                <span className="text-secondary">/</span>design global
+              </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl">
               Nous concevons et réalisons des lieux de vie et de loisirs hyper-personnalisés.
@@ -168,7 +197,7 @@ const Agences = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-secondary" />
-                  <span>Anduze (30) • Gard • Cévennes</span>
+                  <span>Anduze (30) • Gard • Hérault • Littoral • Méditerranée</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-secondary" />
@@ -185,7 +214,7 @@ const Agences = () => {
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-3">Zone d'intervention :</p>
                 <div className="flex flex-wrap gap-2">
-                  {["Nîmes", "Alès", "Uzès", "Montpellier", "Cévennes"].map((city) => (
+                  {["Montpellier", "Nîmes", "Alès", "Uzès", "La Grande Motte", "Sète"].map((city) => (
                     <span
                       key={city}
                       className="px-3 py-1 bg-muted rounded-full text-xs"
@@ -226,7 +255,7 @@ const Agences = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-secondary" />
-                  <span>Challans (85) • Vendée • Littoral</span>
+                  <span>Challans (85) • Pays de la Loire • Vendée • Bretagne</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-secondary" />
@@ -236,14 +265,14 @@ const Agences = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Users className="h-5 w-5 text-secondary" />
-                  <span>1 expert + équipe complète</span>
+                  <span>2 experts, en binôme avec l'équipe du sud</span>
                 </div>
               </div>
 
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-3">Zone d'intervention :</p>
                 <div className="flex flex-wrap gap-2">
-                  {["Noirmoutier", "Les Sables", "La Roche-sur-Yon", "Nantes", "Pornic"].map((city) => (
+                  {["Nantes", "Rennes", "Cholet", "La Roche-sur-Yon", "Noirmoutier", "Pornic", "Les Sables", "La Baule"].map((city) => (
                     <span
                       key={city}
                       className="px-3 py-1 bg-muted rounded-full text-xs"
@@ -381,14 +410,6 @@ const Agences = () => {
                   </div>
                   <span className="text-muted-foreground">
                     <strong className="text-foreground">Gain de luminosité :</strong> +40%
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="h-6 w-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="h-2 w-2 rounded-full bg-secondary" />
-                  </div>
-                  <span className="text-muted-foreground">
-                    <strong className="text-foreground">Budget :</strong> {projects[1]?.budget}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">

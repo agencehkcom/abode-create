@@ -12,7 +12,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <Link to={`/projets/${project.slug}`}>
       <Card className="group overflow-hidden border-0 shadow-medium hover:shadow-large transition-smooth cursor-pointer bg-card">
-        <div className="relative aspect-[4/3] overflow-hidden">
+        <div className="relative aspect-[16/9] overflow-hidden">
           <img
             src={project.coverImage}
             alt={project.title}

@@ -110,7 +110,7 @@ const AgenceSud = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 rounded-full text-secondary">
                 <MapPin className="h-4 w-4" />
-                <span className="text-sm font-medium">Anduze (30) • Gard • Cévennes</span>
+                <span className="text-sm font-medium">Anduze (30) • Gard • Hérault • Littoral • Méditerranée</span>
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -118,7 +118,7 @@ const AgenceSud = () => {
               <span className="block text-secondary">Le QG historique</span>
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-2xl">
-              Votre cabinet d'architecture à Anduze, au cœur des Cévennes. Une équipe pluridisciplinaire passionnée pour tous vos projets dans le Gard, l'Hérault et au-delà.
+              Votre cabinet d'architecture à Anduze. Une équipe pluridisciplinaire passionnée pour tous vos projets dans le Gard, l'Hérault et sur le littoral méditerranéen.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="gradient-accent text-black font-semibold">
@@ -192,15 +192,15 @@ const AgenceSud = () => {
               {[
                 {
                   title: "Gard (30)",
-                  cities: ["Nîmes", "Alès", "Anduze", "Uzès", "Le Vigan", "Saint-Jean-du-Gard"],
+                  cities: ["Montpellier", "Nîmes", "Alès", "Uzès"],
                 },
                 {
                   title: "Hérault (34)",
-                  cities: ["Montpellier", "Béziers", "Sète", "Agde", "Lunel", "Lodève"],
+                  cities: ["La Grande Motte", "Sète"],
                 },
                 {
-                  title: "Régions limitrophes",
-                  cities: ["Avignon", "Arles", "Aix-en-Provence", "Cévennes", "Lozère", "Ardèche"],
+                  title: "Littoral Méditerranée",
+                  cities: ["Côte méditerranéenne", "Et au-delà..."],
                 },
               ].map((zone, index) => (
                 <motion.div

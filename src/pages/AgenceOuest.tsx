@@ -40,13 +40,20 @@ const teamOuest = [
     icon: Lightbulb,
     color: "bg-secondary",
   },
+  {
+    name: "Expert 2",
+    role: "Architecte",
+    description: "En binôme avec l'équipe du sud pour vous accompagner dans tous vos projets en Pays de la Loire, Vendée et Bretagne.",
+    icon: Building,
+    color: "bg-blue-500",
+  },
 ];
 
 const AgenceOuest = () => {
   const stats = [
     { value: "50+", label: "Projets réalisés" },
     { value: "100%", label: "Permis acceptés" },
-    { value: "1", label: "Expert dédié" },
+    { value: "2", label: "Experts dédiés" },
     { value: "8+", label: "Équipe complète" },
   ];
 
@@ -67,7 +74,7 @@ const AgenceOuest = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 rounded-full text-secondary">
                 <MapPin className="h-4 w-4" />
-                <span className="text-sm font-medium">Challans (85) • Vendée • Littoral</span>
+                <span className="text-sm font-medium">Challans (85) • Pays de la Loire • Vendée • Bretagne</span>
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -75,7 +82,7 @@ const AgenceOuest = () => {
               <span className="block text-secondary">L'antenne atlantique</span>
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-2xl">
-              Votre architecte en Vendée, à Challans. Expertise locale pour vos projets sur le littoral atlantique, de Noirmoutier à La Roche-sur-Yon.
+              Votre architecte en Vendée, à Challans. 2 experts en binôme avec l'équipe du sud pour vos projets en Pays de la Loire, Vendée et Bretagne.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="gradient-accent text-black font-semibold">
@@ -148,16 +155,16 @@ const AgenceOuest = () => {
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Vendée (85)",
-                  cities: ["Challans", "Les Sables-d'Olonne", "La Roche-sur-Yon", "Saint-Jean-de-Monts", "Saint-Gilles-Croix-de-Vie"],
+                  title: "Pays de la Loire",
+                  cities: ["Nantes", "La Roche-sur-Yon", "Cholet"],
                 },
                 {
-                  title: "Îles & Littoral",
-                  cities: ["Noirmoutier", "Île d'Yeu", "La Tranche-sur-Mer", "Jard-sur-Mer", "Talmont-Saint-Hilaire"],
+                  title: "Vendée & Littoral",
+                  cities: ["Noirmoutier", "Pornic", "Les Sables", "La Baule"],
                 },
                 {
-                  title: "Régions limitrophes",
-                  cities: ["Nantes", "Pornic", "La Baule", "Cholet", "Fontenay-le-Comte"],
+                  title: "Bretagne",
+                  cities: ["Rennes", "Et au-delà..."],
                 },
               ].map((zone, index) => (
                 <motion.div
@@ -202,10 +209,10 @@ const AgenceOuest = () => {
                 <span className="text-sm font-medium">L'équipe</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Votre interlocuteur en Vendée
+                Vos interlocuteurs en Vendée
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Un expert local, soutenu par toute l'équipe Planet Studio
+                2 experts locaux, en binôme avec l'équipe Planet Studio Sud
               </p>
             </motion.div>
 
@@ -242,7 +249,7 @@ const AgenceOuest = () => {
                   <div>
                     <p className="font-medium mb-2">Une équipe connectée</p>
                     <p className="text-sm text-muted-foreground">
-                      Matthieu travaille en étroite collaboration avec l'équipe de l'agence Sud. Grâce à nos outils collaboratifs, vous bénéficiez de l'expertise de 8 professionnels, comme si nous partagions le même bureau.
+                      Nos 2 experts travaillent en étroite collaboration avec l'équipe de l'agence Sud. Grâce à nos outils collaboratifs, vous bénéficiez de l'expertise de 8 professionnels, comme si nous partagions le même bureau.
                     </p>
                   </div>
                 </div>
