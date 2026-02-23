@@ -24,6 +24,8 @@ import {
   Lightbulb,
   Heart,
   Waves,
+  Accessibility,
+  BookOpen,
 } from "lucide-react";
 import {
   Accordion,
@@ -31,6 +33,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { testimonials } from "@/data/testimonials";
 
 const teamOuest = [
   {
@@ -49,6 +52,58 @@ const teamOuest = [
   },
 ];
 
+const teamSud = [
+  {
+    name: "Ludovic",
+    role: "Fondateur & Directeur",
+    description: "Le fondateur, basé dans le Sud mais toujours à cheval sur tous les projets. Grâce à des outils bien pensés, il orchestre l'ensemble comme si tout le monde partageait le même bureau.",
+    icon: Star,
+    color: "bg-amber-500",
+  },
+  {
+    name: "Naomi",
+    role: "Suivi administratif & financier",
+    description: "La porte d'accès et le guide dans le suivi administratif et financier, indispensable à chaque étape de vos projets.",
+    icon: FileText,
+    color: "bg-blue-500",
+  },
+  {
+    name: "Marine",
+    role: "Architecte conceptrice",
+    description: "Elle fait vivre vos idées, de leur conception jusqu'aux détails les plus précis. Chaque projet prend forme sous son regard expert.",
+    icon: Palette,
+    color: "bg-pink-500",
+  },
+  {
+    name: "Juliana",
+    role: "Experte accessibilité",
+    description: "Notre experte en accessibilité, qui jongle entre normes et solutions sur-mesure pour rendre chaque espace inclusif.",
+    icon: Accessibility,
+    color: "bg-green-500",
+  },
+  {
+    name: "Jérémie",
+    role: "Responsable chantiers",
+    description: "Le maestro des chantiers, qui transforme la précision en livraison. Chaque détail compte pour une exécution parfaite.",
+    icon: Hammer,
+    color: "bg-orange-500",
+  },
+  {
+    name: "Mathilde",
+    role: "Architecte & Suivi de chantier",
+    description: "À cheval entre l'architecture, l'architecture intérieure et le suivi de chantier. Une précieuse alliée avec une solide expérience des projets haut de gamme.",
+    icon: Eye,
+    color: "bg-purple-500",
+  },
+  {
+    name: "Léa",
+    role: "Apprentie architecture intérieure",
+    description: "En apprentissage en architecture intérieure, toujours curieuse et impliquée dans chaque étape des projets.",
+    icon: BookOpen,
+    color: "bg-cyan-500",
+  },
+];
+
 const AgenceOuest = () => {
   const stats = [
     { value: "50+", label: "Projets réalisés" },
@@ -62,7 +117,7 @@ const AgenceOuest = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black text-white relative overflow-hidden">
+      <section className="pt-32 pb-40 bg-black text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-hero opacity-50" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -209,52 +264,100 @@ const AgenceOuest = () => {
                 <span className="text-sm font-medium">L'équipe</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Vos interlocuteurs en Vendée
+                Une seule équipe, deux agences
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                2 experts locaux, en binôme avec l'équipe Planet Studio Sud
+                L'équipe Ouest travaille en binôme permanent avec l'agence Sud. Chaque projet bénéficie de l'expertise collective de nos 9 professionnels.
               </p>
             </motion.div>
 
-            <div className="max-w-xl mx-auto">
-              {teamOuest.map((member, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="bg-card rounded-2xl border border-border p-8 hover:border-secondary/50 hover:shadow-soft transition-all"
-                >
-                  <div className="flex flex-col items-center text-center">
-                    <div className={`w-16 h-16 ${member.color} rounded-2xl flex items-center justify-center mb-4`}>
-                      <member.icon className="h-8 w-8 text-black" />
-                    </div>
-                    <h3 className="font-semibold text-xl mb-1">{member.name}</h3>
-                    <p className="text-secondary font-medium mb-4">{member.role}</p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {member.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+            {/* Équipe locale Ouest */}
+            <div className="mb-12">
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="mt-8 p-6 bg-secondary/10 rounded-2xl border border-secondary/20"
+                className="text-xs uppercase tracking-[0.3em] text-secondary mb-6 text-center"
               >
-                <div className="flex items-start gap-4">
-                  <Heart className="h-6 w-6 text-secondary flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-medium mb-2">Une équipe connectée</p>
-                    <p className="text-sm text-muted-foreground">
-                      Nos 2 experts travaillent en étroite collaboration avec l'équipe de l'agence Sud. Grâce à nos outils collaboratifs, vous bénéficiez de l'expertise de 8 professionnels, comme si nous partagions le même bureau.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+                Basés en Vendée
+              </motion.p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                {teamOuest.map((member, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-card rounded-2xl border-2 border-secondary/30 p-8 hover:border-secondary/50 hover:shadow-soft transition-all"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className={`w-16 h-16 ${member.color} rounded-2xl flex items-center justify-center mb-4`}>
+                        <member.icon className="h-8 w-8 text-black" />
+                      </div>
+                      <h3 className="font-semibold text-xl mb-1">{member.name}</h3>
+                      <p className="text-secondary font-medium mb-4">{member.role}</p>
+                      <p className="text-muted-foreground leading-relaxed text-sm">
+                        {member.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
+
+            {/* Équipe Sud */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-4 justify-center mb-6"
+              >
+                <div className="h-px bg-border flex-1 max-w-[80px]" />
+                <p className="text-xs uppercase tracking-[0.3em] text-secondary">
+                  Basés dans le Sud — en support sur tous vos projets
+                </p>
+                <div className="h-px bg-border flex-1 max-w-[80px]" />
+              </motion.div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {teamSud.map((member, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                    className="bg-card rounded-2xl border border-border p-6 hover:border-secondary/30 transition-all"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className={`w-12 h-12 ${member.color} rounded-xl flex items-center justify-center mb-3`}>
+                        <member.icon className="h-6 w-6 text-black" />
+                      </div>
+                      <h3 className="font-semibold mb-1">{member.name}</h3>
+                      <p className="text-secondary text-xs font-medium">{member.role}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-8 p-6 bg-secondary/10 rounded-2xl border border-secondary/20"
+            >
+              <div className="flex items-start gap-4">
+                <Heart className="h-6 w-6 text-secondary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-medium mb-2">Une équipe connectée</p>
+                  <p className="text-sm text-muted-foreground">
+                    Grâce à nos outils collaboratifs, l'équipe Ouest et l'équipe Sud travaillent ensemble au quotidien. Vous bénéficiez de l'expertise de 9 professionnels, comme si nous partagions le même bureau.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -343,45 +446,36 @@ const AgenceOuest = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full text-secondary mb-4">
               <Star className="h-4 w-4 fill-secondary" />
-              <span className="text-sm font-medium">Témoignages</span>
+              <span className="text-sm font-medium">Avis Google</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ils nous ont fait confiance en Vendée
+              Ils nous ont fait confiance
             </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                text: "Matthieu a su comprendre nos attentes pour notre maison en bord de mer à Noirmoutier. Sa connaissance de la loi littoral et du PLU local nous a évité bien des tracas.",
-                author: "Philippe D.",
-                location: "Construction à Noirmoutier",
-              },
-              {
-                text: "Projet d'extension pour notre résidence secondaire aux Sables-d'Olonne. Un suivi impeccable malgré la distance, grâce à leur organisation. Très satisfaits du résultat.",
-                author: "Isabelle et Marc T.",
-                location: "Extension aux Sables-d'Olonne",
-              },
-            ].map((testimonial, index) => (
+            {testimonials.slice(6, 10).map((testimonial, index) => (
               <motion.div
-                key={index}
+                key={testimonial.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-background rounded-2xl border border-border p-6"
+                className="bg-background rounded-2xl border border-border p-6 flex flex-col"
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm flex-1">
                   "{testimonial.text}"
                 </p>
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                <div className="pt-4 border-t border-border">
+                  <p className="font-semibold text-sm">{testimonial.name}</p>
+                  {testimonial.project && (
+                    <p className="text-xs text-muted-foreground mt-1">{testimonial.project}</p>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -447,8 +541,8 @@ const AgenceOuest = () => {
           className="absolute inset-0 opacity-30"
           style={{
             backgroundImage: "url('/graphique/fond-courbes.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: "500px",
+            backgroundRepeat: "repeat",
           }}
         />
         <div className="container mx-auto px-4 relative z-10">

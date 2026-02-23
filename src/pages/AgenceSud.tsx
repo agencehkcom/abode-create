@@ -32,6 +32,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { testimonials } from "@/data/testimonials";
 
 const teamSud = [
   {
@@ -98,7 +99,7 @@ const AgenceSud = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black text-white relative overflow-hidden">
+      <section className="pt-32 pb-40 bg-black text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-hero opacity-50" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -184,7 +185,7 @@ const AgenceSud = () => {
                 Notre zone d'intervention
               </h2>
               <p className="text-muted-foreground text-lg">
-                Architecte DPLG pour vos projets dans le Sud de la France
+                Architecte HMONP pour vos projets dans le Sud de la France
               </p>
             </div>
 
@@ -369,45 +370,36 @@ const AgenceSud = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full text-secondary mb-4">
               <Star className="h-4 w-4 fill-secondary" />
-              <span className="text-sm font-medium">Témoignages</span>
+              <span className="text-sm font-medium">Avis Google</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ils nous ont fait confiance dans le Gard
+              Ils nous ont fait confiance
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                text: "L'équipe de Planet Studio a transformé notre vieille bâtisse cévenole en un lieu de vie moderne tout en préservant son âme. Leur connaissance du patrimoine local est un vrai atout.",
-                author: "Marie-Claire L.",
-                location: "Rénovation à Anduze",
-              },
-              {
-                text: "Projet de construction d'une maison contemporaine à Uzès. Dossier de permis accepté du premier coup grâce à leur maîtrise du PLU local. Je recommande vivement.",
-                author: "Jean-Pierre M.",
-                location: "Construction à Uzès",
-              },
-            ].map((testimonial, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {testimonials.slice(0, 6).map((testimonial, index) => (
               <motion.div
-                key={index}
+                key={testimonial.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-background rounded-2xl border border-border p-6"
+                transition={{ delay: index * 0.08 }}
+                className="bg-background rounded-2xl border border-border p-6 flex flex-col"
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm flex-1">
                   "{testimonial.text}"
                 </p>
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                <div className="pt-4 border-t border-border">
+                  <p className="font-semibold text-sm">{testimonial.name}</p>
+                  {testimonial.project && (
+                    <p className="text-xs text-muted-foreground mt-1">{testimonial.project}</p>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -473,8 +465,8 @@ const AgenceSud = () => {
           className="absolute inset-0 opacity-30"
           style={{
             backgroundImage: "url('/graphique/fond-courbes.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: "500px",
+            backgroundRepeat: "repeat",
           }}
         />
         <div className="container mx-auto px-4 relative z-10">

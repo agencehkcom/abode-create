@@ -3,10 +3,37 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
-import { projects } from "@/data/projects";
+import { useProjects } from "@/hooks/use-projects";
+import type { Project } from "@/data/projects";
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const { data: dbProjects, isLoading } = useProjects();
+
+  // Adapter les données Supabase au format Project existant
+  const projects: Project[] = (dbProjects ?? []).map((p) => ({
+    id: p.id,
+    title: p.title,
+    slug: p.slug,
+    category: p.category,
+    coverImage: p.cover_image,
+    images: p.images,
+    beforeAfter: p.before_after.map((ba) => ({
+      before: ba.before_image,
+      after: ba.after_image,
+      label: ba.label ?? undefined,
+    })),
+    lieu: p.lieu,
+    surface: p.surface,
+    budget: p.budget,
+    annee: p.annee,
+    mission: p.mission,
+    excerpt: p.excerpt,
+    contexte: p.contexte,
+    contraintes: p.contraintes,
+    solution: p.solution,
+    resultats: p.resultats,
+  }));
 
   const categories = [
     "all",
@@ -37,31 +64,37 @@ const Projects = () => {
       </section>
 
       {/* Filters */}
-      <section className="py-8 bg-muted/30 sticky top-20 z-40 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className={
-                  selectedCategory === category
-                    ? "gradient-accent text-black font-semibold"
-                    : "hover:border-secondary hover:text-secondary transition-smooth"
-                }
-              >
-                {category === "all" ? "Tous les projets" : category}
-              </Button>
-            ))}
+      {!isLoading && (
+        <section className="py-8 bg-muted/30 sticky top-20 z-40 backdrop-blur-sm">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap gap-3">
+              {categories.map((category) => (
+                <Button
+                  key={category}
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category)}
+                  className={
+                    selectedCategory === category
+                      ? "gradient-accent text-black font-semibold"
+                      : "hover:border-secondary hover:text-secondary transition-smooth"
+                  }
+                >
+                  {category === "all" ? "Tous les projets" : category}
+                </Button>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Projects Grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          {filteredProjects.length === 0 ? (
+          {isLoading ? (
+            <div className="flex justify-center py-20">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-secondary" />
+            </div>
+          ) : filteredProjects.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-xl text-muted-foreground">
                 Aucun projet trouvé dans cette catégorie.

@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ContactForm } from "@/components/ContactForm";
-import { projects } from "@/data/projects";
+import { useProjects } from "@/hooks/use-projects";
+import type { Project } from "@/data/projects";
 import { services } from "@/data/services";
 import {
   MapPin,
@@ -26,16 +27,44 @@ import {
 } from "lucide-react";
 
 const Agences = () => {
+  const { data: dbProjects } = useProjects();
+
+  // Adapter les données Supabase au format Project existant
+  const projects: Project[] = (dbProjects ?? []).map((p) => ({
+    id: p.id,
+    title: p.title,
+    slug: p.slug,
+    category: p.category,
+    coverImage: p.cover_image,
+    images: p.images,
+    beforeAfter: p.before_after.map((ba) => ({
+      before: ba.before_image,
+      after: ba.after_image,
+      label: ba.label ?? undefined,
+    })),
+    lieu: p.lieu,
+    surface: p.surface,
+    budget: p.budget,
+    annee: p.annee,
+    mission: p.mission,
+    excerpt: p.excerpt,
+    contexte: p.contexte,
+    contraintes: p.contraintes,
+    solution: p.solution,
+    resultats: p.resultats,
+  }));
+
   const featuredProjects = projects.slice(0, 4);
 
   // Diaporama Hero - images des réalisations
-  const heroImages = projects.map(p => p.coverImage);
+  const heroImages = projects.length > 0 ? projects.map(p => p.coverImage) : ["/projets/sumerien/Ludovic_Martial_Planet_Studio_Anduze_Sumerien_exterieur_AP.webp"];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    if (heroImages.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 6000); // Change toutes les 6 secondes
+    }, 6000);
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
@@ -180,7 +209,7 @@ const Agences = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-background rounded-2xl border border-border p-8 hover:border-secondary/50 hover:shadow-large transition-all group"
+              className="bg-background rounded-2xl border border-border p-8 hover:border-secondary/50 hover:shadow-large transition-all group flex flex-col"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center">
@@ -225,7 +254,7 @@ const Agences = () => {
                 </div>
               </div>
 
-              <Button asChild size="lg" className="w-full gradient-accent text-black font-semibold">
+              <Button asChild size="lg" className="w-full gradient-accent text-black font-semibold mt-auto">
                 <Link to="/agence-sud">
                   Découvrir l'agence Sud
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -238,7 +267,7 @@ const Agences = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-background rounded-2xl border border-border p-8 hover:border-secondary/50 hover:shadow-large transition-all group"
+              className="bg-background rounded-2xl border border-border p-8 hover:border-secondary/50 hover:shadow-large transition-all group flex flex-col"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center">
@@ -283,7 +312,7 @@ const Agences = () => {
                 </div>
               </div>
 
-              <Button asChild size="lg" className="w-full gradient-accent text-black font-semibold">
+              <Button asChild size="lg" className="w-full gradient-accent text-black font-semibold mt-auto">
                 <Link to="/agence-ouest">
                   Découvrir l'agence Ouest
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -577,8 +606,8 @@ const Agences = () => {
           className="absolute inset-0 opacity-30"
           style={{
             backgroundImage: "url('/graphique/fond-courbes.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: "500px",
+            backgroundRepeat: "repeat",
           }}
         />
         <div className="container mx-auto px-4 relative z-10">

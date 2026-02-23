@@ -14,6 +14,12 @@ import AgenceSud from "./pages/AgenceSud";
 import AgenceOuest from "./pages/AgenceOuest";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { ProtectedRoute } from "./components/admin/ProtectedRoute";
+import { AdminLayout } from "./components/admin/AdminLayout";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProjects from "./pages/admin/AdminProjects";
+import AdminProjectEdit from "./pages/admin/AdminProjectEdit";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +31,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          {/* Public routes */}
           <Route path="/" element={<Agences />} />
           <Route path="/projets" element={<Projects />} />
           <Route path="/projets/:slug" element={<ProjectDetail />} />
@@ -34,7 +41,18 @@ const App = () => (
           <Route path="/agence-sud" element={<AgenceSud />} />
           <Route path="/agence-ouest" element={<AgenceOuest />} />
           <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
+          {/* Admin routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/projects" element={<AdminProjects />} />
+              <Route path="/admin/projects/new" element={<AdminProjectEdit />} />
+              <Route path="/admin/projects/:id/edit" element={<AdminProjectEdit />} />
+            </Route>
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

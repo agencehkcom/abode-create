@@ -398,8 +398,8 @@ const PermisConstruire = () => {
           className="absolute inset-0 opacity-30"
           style={{
             backgroundImage: "url('/graphique/fond-courbes.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: "500px",
+            backgroundRepeat: "repeat",
           }}
         />
         <div className="container mx-auto px-4 text-center relative z-10">
